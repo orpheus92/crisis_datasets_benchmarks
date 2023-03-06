@@ -277,7 +277,12 @@ def evaluate(args, model, tokenizer, label_list, prefix=""):
             preds = np.squeeze(preds)
 
         processor = processors[args.task_name]()
+        
         #label_list = processor.get_labels()
+        print("##########################")
+        print(os.path.join(args.output_dir, '{}_preds.bin'.format(args.test_file)))
+        np.save(os.path.join(args.output_dir, '{}_preds.bin'.format(args.test_file)), preds)
+
 
         task_result = compute_metrics(eval_task, preds, out_label_ids,label_list)
 
